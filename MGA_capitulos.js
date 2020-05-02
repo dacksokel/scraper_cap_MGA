@@ -4,12 +4,12 @@ const fs = require('fs');
 
 
 const url = 'https://www.skynovels.net/martial-god-asura/mga-capitulo-';
-let inicio = 1600;
-//let final = 2759;
-let final = 1700;
+let inicio = 1700;
+let final = 2759;
+//let final = 1700;
 let pdf_1 = new pdf;
 
-pdf_1.pipe(fs.createWriteStream('MGA_CAP_1600_2759.pdf'));
+pdf_1.pipe(fs.createWriteStream('MGA_CAP_1700_2759.pdf'));
 
 (async ()=>{
     console.log("----- Iniciando Extraccion de capitulos MGA-------")
