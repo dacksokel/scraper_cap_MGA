@@ -724,7 +724,7 @@ const urls = [
     pdf_1.pipe(fs.createWriteStream('LLS_700_to_1399.pdf'));
 
 
-    for (let index = 0; index <= urls.length; index++) {
+    for (let index = 0; index < urls.length; index++) {
         
         await page.goto(urls[index]);
         
@@ -738,7 +738,7 @@ const urls = [
             });
         capitulos = capitulos + cap + "\n\n";    
         console.clear();
-        console.log(capitulos);
+        console.log(urls[index]);
 
     }
 
