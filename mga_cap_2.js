@@ -2,9 +2,7 @@ const puppeteer = require("puppeteer");
 const pdf = require('pdfkit');
 const fs = require('fs');
 
-
-const url = 'http://www.devilnovels.com/2020/03/martial-god-asura-mga-capitulo-';
-let inicio = 4030;
+let inicio = 4080;
 let final = 4196;
 //let final = 1700;
 let pdf_1 = new pdf;
@@ -16,13 +14,16 @@ pdf_1.pipe(fs.createWriteStream(`MGA_CAP_${inicio}_${final}.pdf`));
     const browser = await puppeteer.launch(
         {   headless: false
         });    
-    const page = await browser.newPage();
+        const page = await browser.newPage();
+        
+        let capitulos = "";
+        let capitulo;
+        let cambio = 3;
 
-    let capitulos = "";
-    let capitulo;
-    while(inicio < final){
-        try{
-
+        while(inicio < final){
+            try{
+                
+            let url = `http://www.devilnovels.com/2020/0${cambio}/martial-god-asura-mga-capitulo-`;
             await page.goto(url+inicio+".html");
 
             capitulo = await page.evaluate(
@@ -32,6 +33,8 @@ pdf_1.pipe(fs.createWriteStream(`MGA_CAP_${inicio}_${final}.pdf`));
                     
                     if(salida != null){
                        return salida.innerText;
+                    }else{
+                        return 'error';
                     }
                 }
     
@@ -41,12 +44,16 @@ pdf_1.pipe(fs.createWriteStream(`MGA_CAP_${inicio}_${final}.pdf`));
             console.log("Error pagina del capitulo no encontrada");
         }
 
-        console.log("Capitulo: "+ inicio+" Extraido");
         //console.log(capitulo);
         //console.log("\n\n");
-        inicio++;
-
-        capitulos = capitulos + capitulo + '\n\n';
+        if(capitulo != 'error'){
+            console.log("Capitulo: "+ inicio+" Extraido");
+            inicio++;
+            capitulos = capitulos + capitulo + '\n\n';
+        }else{
+            console.log("Error al intentar descargar el capitulo");
+            cambio++;
+        }
     }
     await browser.close();
 
