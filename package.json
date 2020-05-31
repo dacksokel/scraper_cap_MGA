@@ -1,0 +1,15 @@
+{
+  "name": "MGA",
+  "version": "1.0.0",
+  "description": "MGA scraper capitulos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "dacksokel",
+  "license": "ISC",
+  "dependencies": {
+    "pdfkit": "^0.11.0",
+    "puppeteer": "^3.0.2"
+  }
+}
